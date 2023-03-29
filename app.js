@@ -17,7 +17,10 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to Database");
 });
 
-var allowedOrigins = ["https://footballshoestore.netlify.app"];
+var allowedOrigins = [
+  "https://footballshoestore.netlify.app",
+  "https://footballshoestoreadmin.netlify.app/",
+];
 app.use(
   cors({
     origin: function (origin, callback) {
