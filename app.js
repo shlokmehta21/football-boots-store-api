@@ -20,6 +20,7 @@ mongoose.connection.on("connected", () => {
 var allowedOrigins = [
   "https://footballshoestore.netlify.app",
   "https://footballshoestoreadmin.netlify.app",
+  "http://localhost:3000",
 ];
 app.use(
   cors({
