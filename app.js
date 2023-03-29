@@ -11,13 +11,11 @@ const OrderRoute = require("./routes/orders");
 const StripeRoute = require("./routes/stripe");
 dotenv.config();
 
-const corsOptions = {
-  origin: "https://football-boots-store-api-production.up.railway.app/",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
 mongoose.connect(process.env.MONGO_URL);
 
