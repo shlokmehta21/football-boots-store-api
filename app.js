@@ -11,19 +11,30 @@ const OrderRoute = require("./routes/orders");
 const StripeRoute = require("./routes/stripe");
 dotenv.config();
 
-app.use(
-  cors({
-    origin: "https://footballshoestore.netlify.app/",
-    credentials: true, //access-control-allow-credentials:true
-    optionSuccessStatus: 200,
-  })
-);
-
 mongoose.connect(process.env.MONGO_URL);
 
 mongoose.connection.on("connected", () => {
   console.log("Connected to Database");
 });
+
+var allowedOrigins = [
+  "http://localhost:3000",
+  "https://footballshoestore.netlify.app/",
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        var msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+  })
+);
 
 app.use(express.json());
 
