@@ -20,7 +20,7 @@ mongoose.connection.on("connected", () => {
 var allowedOrigins = [
   "https://footballshoestore.netlify.app",
   "https://footballshoestoreadmin.netlify.app",
-  "https://football-store-api.onrender.com/",
+  "https://football-store-api.onrender.com",
   "http://localhost:3000",
 ];
 app.use(
