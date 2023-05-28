@@ -17,22 +17,23 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to Database");
 });
 
-// var allowedOrigins = [
-//   "https://footballshoestore.netlify.app",
-//   "https://footballshoestoreadmin.netlify.app",
-//   "http://localhost:3000",
-// ];
-// app.use(
-//   cors({
-//     origin: function (origin, callback) {
-//       if (allowedOrigins.indexOf(origin) !== -1) {
-//         callback(null, true);
-//       } else {
-//         callback(new Error("Not allowed by CORS"));
-//       }
-//     },
-//   })
-// );
+var allowedOrigins = [
+  "https://footballshoestore.netlify.app",
+  "https://footballshoestoreadmin.netlify.app",
+  "https://football-store-api.onrender.com/",
+  "http://localhost:3000",
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+  })
+);
 
 app.use(express.json());
 
