@@ -17,23 +17,41 @@ mongoose.connection.on("connected", () => {
   console.log("Connected to Database");
 });
 
-var allowedOrigins = [
-  "https://footballshoestore.netlify.app",
-  "https://footballshoestoreadmin.netlify.app",
-  "https://football-store-api.onrender.com",
-  "http://localhost:3000",
-];
-app.use(
-  cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
+// var allowedOrigins = [
+//   "https://footballshoestore.netlify.app",
+//   "https://footballshoestoreadmin.netlify.app",
+//   "https://football-store-api.onrender.com",
+//   "http://localhost:3000",
+// ];
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       if (allowedOrigins.indexOf(origin) !== -1) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//   })
+// );
+
+app.use(function(req, res, next) {
+      // res.header("Access-Control-Allow-Origin", "*");
+      const allowedOrigins = [
+         "https://footballshoestore.netlify.app",
+         "https://footballshoestoreadmin.netlify.app",
+         "https://football-store-api.onrender.com",
+         "http://localhost:3000",
+         ];
+      const origin = req.headers.origin;
+      if (allowedOrigins.includes(origin)) {
+           res.setHeader('Access-Control-Allow-Origin', origin);
       }
-    },
-  })
-);
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+      res.header("Access-Control-Allow-credentials", true);
+      res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, UPDATE");
+      next();
+    });
 
 app.use(express.json());
 
